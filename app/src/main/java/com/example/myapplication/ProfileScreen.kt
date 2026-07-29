@@ -145,7 +145,7 @@ fun ProfileScreen() {
             )
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                border = if (isSystemInDarkTheme()) BorderStroke(1.dp, MaroonPrimary) else BorderStroke(0.5.dp, MaterialTheme.colorScheme.outlineVariant),
+                border = if (isSystemInDarkTheme()) BorderStroke(1.dp, GoldTertiary.copy(alpha = 0.5f)) else BorderStroke(0.5.dp, MaterialTheme.colorScheme.outlineVariant),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
                 shape = RoundedCornerShape(16.dp)
             ) {
