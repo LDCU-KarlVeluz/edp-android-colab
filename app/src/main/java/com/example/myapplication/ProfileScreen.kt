@@ -29,9 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.myapplication.ui.theme.GoldTertiary
-import com.example.myapplication.ui.theme.MaroonPrimary
-import com.example.myapplication.ui.theme.MyApplicationTheme
+import com.example.myapplication.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,13 +43,13 @@ fun ProfileScreen() {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Back",
-                            tint = if (isSystemInDarkTheme()) GoldTertiary else GoldTertiary
+                            tint = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Color.White
                         )
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = if (isSystemInDarkTheme()) Color(0xFF1E1E1E) else MaroonPrimary,
-                    titleContentColor = if (isSystemInDarkTheme()) GoldTertiary else Color.White,
+                    containerColor = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.primary,
+                    titleContentColor = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Color.White,
                 )
             )
         }
@@ -66,7 +64,7 @@ fun ProfileScreen() {
                     if (isSystemInDarkTheme()) Modifier
                     else Modifier.background(
                         Brush.verticalGradient(
-                            colors = listOf(MaroonPrimary.copy(alpha = 0.05f), Color.Transparent)
+                            colors = listOf(MaterialTheme.colorScheme.primary.copy(alpha = 0.05f), Color.Transparent)
                         )
                     )
                 )
@@ -145,7 +143,7 @@ fun ProfileScreen() {
             )
             Card(
                 modifier = Modifier.fillMaxWidth(),
-                border = if (isSystemInDarkTheme()) BorderStroke(1.dp, GoldTertiary.copy(alpha = 0.5f)) else BorderStroke(0.5.dp, MaterialTheme.colorScheme.outlineVariant),
+                border = if (isSystemInDarkTheme()) null else BorderStroke(0.5.dp, MaterialTheme.colorScheme.outlineVariant),
                 elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
                 shape = RoundedCornerShape(16.dp)
             ) {
