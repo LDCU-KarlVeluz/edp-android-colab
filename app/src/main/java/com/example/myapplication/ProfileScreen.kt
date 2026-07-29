@@ -43,13 +43,13 @@ fun ProfileScreen() {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Back",
-                            tint = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Color.White
+                            tint = Color.White
                         )
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.primary,
-                    titleContentColor = if (isSystemInDarkTheme()) MaterialTheme.colorScheme.primary else Color.White,
+                    containerColor = PrimaryLight,
+                    titleContentColor = Color.White,
                 )
             )
         }
