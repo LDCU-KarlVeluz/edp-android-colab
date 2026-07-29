@@ -16,7 +16,10 @@ private val DarkColorScheme = darkColorScheme(
     onPrimary = OnPrimaryDark,
     primaryContainer = PrimaryContainerDark,
     secondary = SecondaryDark,
+    background = SurfaceDark,
     surface = SurfaceDark,
+    onBackground = OnSurfaceVariantDark,
+    onSurface = OnSurfaceVariantDark,
     onSurfaceVariant = OnSurfaceVariantDark
 )
 
@@ -25,7 +28,10 @@ private val LightColorScheme = lightColorScheme(
     onPrimary = OnPrimaryLight,
     primaryContainer = PrimaryContainerLight,
     secondary = SecondaryLight,
+    background = SurfaceLight,
     surface = SurfaceLight,
+    onBackground = Color(0xFF1C1B1F),
+    onSurface = Color(0xFF1C1B1F),
     onSurfaceVariant = OnSurfaceVariantLight
 )
 
