@@ -1,232 +1,274 @@
 package com.example.myapplication
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Groups
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Phone
-import androidx.compose.material.icons.filled.School
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import android.content.res.Configuration
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.example.myapplication.ui.theme.*
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun ProfileScreen() {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Student Profile", fontWeight = FontWeight.ExtraBold) },
-                navigationIcon = {
-                    IconButton(onClick = { }) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
-                            tint = Color.White
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = PrimaryLight,
-                    titleContentColor = Color.White,
-                )
-            )
-        }
-    ) { innerPadding ->
-        val scrollState = rememberScrollState()
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .verticalScroll(scrollState)
-                .then(
-                    if (isSystemInDarkTheme()) Modifier
-                    else Modifier.background(
-                        Brush.verticalGradient(
-                            colors = listOf(MaterialTheme.colorScheme.primary.copy(alpha = 0.05f), Color.Transparent)
-                        )
-                    )
-                )
-                .padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            Box(
-                modifier = Modifier
-                    .padding(top = 16.dp)
-                    .size(140.dp)
-                    .shadow(12.dp, CircleShape)
-                    .clip(CircleShape)
-                    .background(MaterialTheme.colorScheme.surface)
-                    .border(3.dp, MaterialTheme.colorScheme.primary, CircleShape)
-                    .padding(4.dp)
-                    .border(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.5f), CircleShape),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "RKV",
-                    style = MaterialTheme.typography.displaySmall,
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-            Spacer(modifier = Modifier.height(8.dp))
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(
-                    text = "Ritchie Karl Veluz",
-                    style = MaterialTheme.typography.headlineLarge,
-                    color = MaterialTheme.colorScheme.primary,
-                    fontWeight = FontWeight.ExtraBold,
-                    textAlign = TextAlign.Center
-                )
-                Surface(
-                    color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
-                    shape = RoundedCornerShape(16.dp),
-                    modifier = Modifier.padding(top = 8.dp)
-                ) {
-                    Row(
-                        modifier = Modifier.padding(horizontal = 12.dp, vertical = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.School,
-                            contentDescription = null,
-                            modifier = Modifier.size(16.dp),
-                            tint = MaterialTheme.colorScheme.primary
-                        )
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Text(
-                            text = "Bachelor of Science in Information Technology",
-                            style = MaterialTheme.typography.labelLarge,
-                            color = MaterialTheme.colorScheme.primary,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                }
-            }
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 12.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                StatItem(label = "Year", value = "3rd")
-                StatItem(label = "Section", value = "3-2")
-            }
-            Text(
-                text = "Personal Information",
-                modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
-                style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onSurface
-            )
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                border = if (isSystemInDarkTheme()) null else BorderStroke(0.5.dp, MaterialTheme.colorScheme.outlineVariant),
-                elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-                shape = RoundedCornerShape(16.dp)
-            ) {
-                Column(modifier = Modifier.padding(16.dp)) {
-                    InfoRow(icon = Icons.Default.Person, label = "Full Name", value = "Ritchie Karl Veluz")
-                    HorizontalDivider(thickness = 0.5.dp, color = MaterialTheme.colorScheme.outlineVariant)
-                    InfoRow(icon = Icons.Default.School, label = "Course", value = "B.S. in Information Technology")
-                    HorizontalDivider(thickness = 0.5.dp, color = MaterialTheme.colorScheme.outlineVariant)
-                    InfoRow(icon = Icons.Default.Groups, label = "Section", value = "3-2")
-                    HorizontalDivider(thickness = 0.5.dp, color = MaterialTheme.colorScheme.outlineVariant)
-                    InfoRow(icon = Icons.Default.Phone, label = "Mobile No.", value = "09189900877")
-                    HorizontalDivider(thickness = 0.5.dp, color = MaterialTheme.colorScheme.outlineVariant)
-                    InfoRow(icon = Icons.Default.Email, label = "Email Address", value = "rkveluz68722@liceo.edu.ph")
-                }
-            }
-            Spacer(modifier = Modifier.height(16.dp))
-        }
-    }
-}
+import com.example.myapplication.ui.theme.MyApplicationTheme
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
-fun StatItem(label: String, value: String) {
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(
-            text = value,
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.ExtraBold,
-            color = MaterialTheme.colorScheme.primary
-        )
-        Text(
-            text = label,
-            style = MaterialTheme.typography.labelMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-    }
-}
-
-@Composable
-fun InfoRow(icon: ImageVector, label: String, value: String) {
-    Row(
+fun ProfileForm(state: ProfileUiState, viewModel: ProfileViewModel) {
+    Column(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 4.dp),
-        verticalAlignment = Alignment.CenterVertically
+            .fillMaxSize()
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState())
     ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = label,
-            modifier = Modifier.size(24.dp),
-            tint = MaterialTheme.colorScheme.primary
+        Text(
+            text = "My Profile",
+            fontSize = 28.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
         )
-        Spacer(modifier = Modifier.width(16.dp))
-        Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = label,
-                style = MaterialTheme.typography.labelMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+        Spacer(Modifier.height(12.dp))
+
+        OutlinedTextField(
+            value = state.name,
+            onValueChange = { viewModel.onNameChange(it) },
+            label = { Text("Full name") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(
+            value = state.email,
+            onValueChange = { viewModel.onEmailChange(it) },
+            label = { Text("Email") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(
+            value = state.contactNumber,
+            onValueChange = { viewModel.onContactChange(it) },
+            label = { Text("Contact number") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(
+            value = state.address,
+            onValueChange = { viewModel.onAddressChange(it) },
+            label = { Text("Address") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(
+            value = state.username,
+            onValueChange = { viewModel.onUsernameChange(it) },
+            label = { Text("Username") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(Modifier.height(16.dp))
+        Text("Skills", fontWeight = FontWeight.Bold)
+
+        // Type a skill + Add button
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            OutlinedTextField(
+                value = state.newSkill,
+                onValueChange = { viewModel.onNewSkillChange(it) },
+                label = { Text("Add a skill") },
+                modifier = Modifier.weight(1f)
             )
-            Text(
-                text = value,
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onSurface
-            )
+            Spacer(Modifier.width(8.dp))
+            Button(onClick = { viewModel.addSkill() }) {
+                Text("Add")
+            }
+        }
+
+        // One row per skill, each with a Remove button
+        state.skills.forEach { skill ->
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("• $skill", modifier = Modifier.weight(1f))
+                TextButton(onClick = { viewModel.removeSkill(skill) }) {
+                    Text("Remove")
+                }
+            }
+        }
+
+        Spacer(Modifier.height(20.dp))
+        Button(
+            onClick = { viewModel.showPreview() },
+            modifier = Modifier.fillMaxWidth(),
+            enabled = state.name.isNotBlank() && state.email.isNotBlank()
+        ) {
+            Text("Preview")
+        }
+
+        Spacer(Modifier.height(8.dp))
+        OutlinedButton(
+            onClick = { viewModel.clearAll() },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Clear all")
         }
     }
 }
 
-@Preview(showBackground = true, name = "Light Mode")
+@OptIn(ExperimentalLayoutApi::class)
+@Composable
+fun ProfilePreview(state: ProfileUiState, onBack: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState()),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            "Profile Preview",
+            fontSize = 28.sp,
+            fontWeight = FontWeight.ExtraBold,
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.padding(bottom = 24.dp)
+        )
+
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 24.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f)
+            )
+        ) {
+            Column(
+                modifier = Modifier.padding(24.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                ProfileDetailItem(label = "Full Name", value = state.name)
+                ProfileDetailItem(label = "Email Address", value = state.email)
+                ProfileDetailItem(label = "Contact Number", value = state.contactNumber)
+                ProfileDetailItem(label = "Address", value = state.address)
+                ProfileDetailItem(label = "Username", value = state.username)
+
+                HorizontalDivider(
+                    modifier = Modifier.padding(vertical = 8.dp),
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f)
+                )
+
+                Text(
+                    "Skills",
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = MaterialTheme.colorScheme.primary
+                )
+
+                if (state.skills.isEmpty()) {
+                    Text(
+                        "No skills added yet.",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color.Gray
+                    )
+                } else {
+                    FlowRow(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        state.skills.forEach { skill ->
+                            SkillChip(skill)
+                        }
+                    }
+                }
+            }
+        }
+
+        OutlinedButton(
+            onClick = onBack,
+            modifier = Modifier.fillMaxWidth(),
+            shape = MaterialTheme.shapes.medium
+        ) {
+            Text("Back to edit", fontWeight = FontWeight.SemiBold)
+        }
+    }
+}
+
+@Composable
+fun ProfileDetailItem(label: String, value: String) {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Text(
+            text = label.uppercase(),
+            fontSize = 12.sp,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.secondary,
+            letterSpacing = 1.sp
+        )
+        Text(
+            text = if (value.isBlank()) "Not provided" else value,
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Medium,
+            color = if (value.isBlank()) Color.Gray else MaterialTheme.colorScheme.onSurfaceVariant
+        )
+    }
+}
+
+@Composable
+fun SkillChip(skill: String) {
+    Surface(
+        color = MaterialTheme.colorScheme.primaryContainer,
+        shape = MaterialTheme.shapes.large,
+        modifier = Modifier.padding(vertical = 4.dp)
+    ) {
+        Text(
+            text = skill,
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+            style = MaterialTheme.typography.bodyMedium,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.onPrimaryContainer
+        )
+    }
+}
+
+@Composable
+fun ProfileScreen(viewModel: ProfileViewModel = viewModel()) {
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
+
+    if (state.isPreview) {
+        ProfilePreview(state = state, onBack = { viewModel.backToEdit() })
+    } else {
+        ProfileForm(state = state, viewModel = viewModel)
+    }
+}
+
+@Preview(showBackground = true)
 @Composable
 fun ProfileScreenPreview() {
-    MyApplicationTheme(darkTheme = false) {
-        Surface(color = MaterialTheme.colorScheme.background) {
-            ProfileScreen()
-        }
+    MyApplicationTheme {
+        ProfileScreen()
     }
 }
 
-@Preview(showBackground = true, name = "Dark Mode")
+@Preview(
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    name = "Dark Mode"
+)
 @Composable
 fun ProfileScreenDarkPreview() {
-    MyApplicationTheme(darkTheme = true) {
-        Surface(color = MaterialTheme.colorScheme.background) {
-            ProfileScreen()
-        }
+    MyApplicationTheme {
+        ProfileScreen()
     }
 }
