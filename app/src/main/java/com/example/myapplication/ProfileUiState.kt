@@ -7,6 +7,6 @@ data class ProfileUiState(
     val address: String = "",
     val username: String = "",
     val skills: List<String> = emptyList(),
-    val newSkill: String = "",    // text typed in the "add skill" box
-    val isPreview: Boolean = false // false = editing, true = preview
+    val newSkill: String = "",
+    val isPreview: Boolean = false
 )
