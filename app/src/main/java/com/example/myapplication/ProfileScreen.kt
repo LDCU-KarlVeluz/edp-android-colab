@@ -216,7 +216,7 @@ private fun SkillChip(skill: String) {
 
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
+fun ProfileScreenPreview() {
     MyApplicationTheme {
         ProfileScreen()
     }
