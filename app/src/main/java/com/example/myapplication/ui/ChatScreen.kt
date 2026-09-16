@@ -7,15 +7,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myapplication.domain.Message
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,39 +20,41 @@ fun ChatScreen(
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("LiceoChat") },
-                actions = {
-                    IconButton(onClick = { viewModel.load() }) {
-                        Icon(Icons.Default.Refresh, contentDescription = "Refresh")
-                    }
+            TopAppBar(title = { Text("LiceoChat") }, actions = {
+                IconButton(onClick = { viewModel.load() }) {
+                    Icon(Icons.Default.Refresh, contentDescription = "Refresh")
                 }
-            )
+            })
         }
     ) { padding ->
         Column(Modifier.padding(padding).fillMaxSize()) {
             Box(Modifier.weight(1f).fillMaxWidth()) {
                 when (val state = viewModel.uiState) {
-                    ChatUiState.Loading -> CircularProgressIndicator(Modifier.align(Alignment.Center))
-                    ChatUiState.Empty -> Text("No messages yet. Say hello!", Modifier.align(Alignment.Center))
-                    is ChatUiState.Ready -> {
+                    ChatUiState.Loading ->
+                        CircularProgressIndicator(Modifier.align(Alignment.Center))
+
+                    ChatUiState.Empty ->
+                        Text(
+                            "No messages yet. Say hello!",
+                            modifier = Modifier.align(Alignment.Center)
+                        )
+
+                    is ChatUiState.Ready ->
                         LazyColumn(Modifier.fillMaxSize()) {
-                            items(state.messages, key = { it.id }) { 
-                                MessageRow(it)
-                            }
+                            items(state.messages, key = { it.id }) { MessageRow(it) }
                         }
-                    }
-                    is ChatUiState.Error -> {
+
+                    is ChatUiState.Error ->
                         Column(
                             Modifier.align(Alignment.Center),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Text(state.message)
+                            Spacer(Modifier.height(8.dp))
                             Button(onClick = { viewModel.load() }) {
                                 Text("Retry")
                             }
                         }
-                    }
                 }
             }
             MessageInput(
@@ -72,18 +70,8 @@ fun ChatScreen(
 
 @Composable
 fun MessageRow(message: Message) {
-    val time = remember(message.createdAt) {
-        SimpleDateFormat("MMM d, h:mm a", Locale.getDefault()).format(Date(message.createdAt))
-    }
     Column(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Text(message.sender, style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.primary)
-            Text(time, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.outline)
-        }
+        Text(message.sender, style = MaterialTheme.typography.labelLarge)
         Text(message.text, style = MaterialTheme.typography.bodyMedium)
     }
     HorizontalDivider()

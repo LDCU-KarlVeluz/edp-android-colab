@@ -15,36 +15,38 @@ import com.example.myapplication.data.repository.ChatRepositoryImpl
 import com.example.myapplication.domain.ChatRepository
 import kotlinx.coroutines.launch
 
-class ChatViewModel(private val repository: ChatRepository) : ViewModel() {
+class ChatViewModel(
+    private val repository: ChatRepository
+) : ViewModel() {
+
     var uiState: ChatUiState by mutableStateOf(ChatUiState.Loading)
         private set
-    
+
     var myName: String by mutableStateOf("Ritchie Karl Veluz")
         private set
-        
+
     var draft: String by mutableStateOf("")
         private set
-        
+
     fun onNameChange(value: String) { myName = value }
     fun onDraftChange(value: String) { draft = value }
-    
+
     init { load() }
-    
+
     fun load() {
         viewModelScope.launch {
             uiState = ChatUiState.Loading
             uiState = when (val r = repository.getMessages()) {
                 is AppResult.Success -> if (r.data.isEmpty()) ChatUiState.Empty else ChatUiState.Ready(r.data)
-                is AppResult.Failure.NoInternet -> ChatUiState.Error("No internet connection.")
-                is AppResult.Failure.Timeout -> ChatUiState.Error("The server took too long.")
+                AppResult.Failure.NoInternet -> ChatUiState.Error("No internet connection.")
+                AppResult.Failure.Timeout -> ChatUiState.Error("The server took too long.")
                 is AppResult.Failure -> ChatUiState.Error("Something went wrong.")
             }
         }
     }
-    
+
     fun send() {
         if (myName.isBlank() || draft.isBlank()) return
-        
         viewModelScope.launch {
             when (repository.sendMessage(myName, draft)) {
                 is AppResult.Success -> {
