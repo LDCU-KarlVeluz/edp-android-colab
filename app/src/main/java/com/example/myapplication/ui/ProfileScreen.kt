@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -10,8 +10,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.example.myapplication.ui.PostsViewModel
-import com.example.myapplication.ui.ThemeViewModel
 
 @Composable
 fun ProfileScreen(postsVm: PostsViewModel, themeVm: ThemeViewModel) {

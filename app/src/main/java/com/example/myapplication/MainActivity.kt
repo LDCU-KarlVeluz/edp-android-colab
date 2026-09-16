@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.myapplication.ui.*
-import com.example.myapplication.ui.theme.MyApplicationTheme
+import com.example.myapplication.ui.theme.MySocialTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
             
             val darkTheme by themeVm.isDarkTheme.collectAsStateWithLifecycle()
             
-            MyApplicationTheme(darkTheme = darkTheme) {
+            MySocialTheme(darkTheme = darkTheme) {
                 MySocialApp(postsVm, themeVm)
             }
         }
