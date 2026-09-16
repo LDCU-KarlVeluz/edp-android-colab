@@ -19,11 +19,9 @@ object FlexibleLongSerializer : KSerializer<Long?> {
         val input = decoder as? JsonDecoder ?: return decoder.decodeLong()
         val element = input.decodeJsonElement() as? JsonPrimitive ?: return null
         
-        // Try Long first
         val longVal = element.longOrNull
         if (longVal != null) return longVal
         
-        // Try parsing as ISO String
         return try {
             Instant.parse(element.content).toEpochMilli()
         } catch (e: DateTimeParseException) {
