@@ -20,13 +20,13 @@ class ChatRepositoryImpl(
     override suspend fun getMessages(): AppResult<List<Message>> {
         val result = safeCall { api.getMessages().toDomain() }
         
-        return if (result is AppResult.Success) {
+        if (result is AppResult.Success) {
             dao.insertAll(result.data.map { it.toEntity() })
-            result
-        } else {
-            val saved = dao.getAll().map { it.toDomain() }
-            if (saved.isNotEmpty()) AppResult.Success(saved) else result
+            return result
         }
+        
+        val saved = dao.getAll().map { it.toDomain() }
+        return if (saved.isNotEmpty()) AppResult.Success(saved) else result
     }
 
     override suspend fun sendMessage(sender: String, text: String): AppResult<Unit> = safeCall {

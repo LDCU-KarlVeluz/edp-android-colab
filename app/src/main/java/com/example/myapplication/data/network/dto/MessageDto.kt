@@ -7,6 +7,7 @@ data class MessageDto(
     val id: String? = null,
     val sender: String? = null,
     val text: String? = null,
+    @Serializable(with = FlexibleLongSerializer::class)
     val createdAt: Long? = null
 )
 

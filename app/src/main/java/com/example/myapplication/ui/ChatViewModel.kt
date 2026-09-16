@@ -19,7 +19,7 @@ class ChatViewModel(private val repository: ChatRepository) : ViewModel() {
     var uiState: ChatUiState by mutableStateOf(ChatUiState.Loading)
         private set
     
-    var myName: String by mutableStateOf("")
+    var myName: String by mutableStateOf("Ritchie Karl Veluz")
         private set
         
     var draft: String by mutableStateOf("")
